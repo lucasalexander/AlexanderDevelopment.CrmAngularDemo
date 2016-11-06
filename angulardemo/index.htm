@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html ng-app="crmEditorApp">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+    <meta charset="utf-8"/>
+    <title>Lucas Alexander CRM-Angular demo</title>
+    <script src="../../ClientGlobalContext.js.aspx" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="Scripts/es6promise.min.js"></script>
+    <script src="Scripts/webapisdk.js"></script>
+    <script src="Scripts/app.js"></script>
+    <style>
+        fieldset {
+            width: 450px;
+        }
+        label {
+            float:left;
+            width:150px;
+            text-align:right;
+            font-weight:bold;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="CrmEditorController as crmEditor">
+        <h2>Record editor</h2>
+        <fieldset>
+            <legend>Main record</legend>
+            <label for="name">Name: </label> <input name="name" type="text" ng-value="crmEditor.mainrecord.name" ng-model="crmEditor.mainrecord.name" id="name" /><br />
+            <label for="description">Description: </label>
+            <textarea name="description" ng-value="crmEditor.mainrecord.description" ng-model="crmEditor.mainrecord.description" id="description"></textarea><br />
+            <button ng-click="crmEditor.UpdateRecord()">Update record</button>
+        </fieldset>
+        <h3>Related tasks</h3>
+        <table border="1">
+            <tr>
+                <th>Subject</th>
+                <th>Description</th>
+                <th>Due</th>
+            </tr>
+            <tr ng-repeat="task in crmEditor.tasks">
+                <td>{{task.subject}}</td>
+                <td>{{task.description}}</td>
+                <td>{{task.scheduledend.toLocaleDateString()}}</td>
+            </tr>
+        </table>
+        <h3>New task</h3>
+        <fieldset>
+            <legend>Add related task</legend>
+            <label for="tasksubject">Subject: </label> <input ng-model="tasksubject" name="tasksubject" type="text" id="tasksubject" /><br />
+            <label for="taskdescription">Description: </label> <input ng-model="taskdescription" name="taskdescription" type="text" id="taskdescription" /><br />
+            <label for="taskdue">Due date: </label> <input ng-model="taskdue" type="datetime" name="taskdue" id="taskdue" /><br />
+            <button ng-click="crmEditor.AddTask()">Add new task</button>
+        </fieldset>
+        
+    </div>
+</body>
+</html>
