@@ -67,6 +67,7 @@ Sdk.request = function (action, uri, data, formattedValue, maxPageSize) {
         request.setRequestHeader("Accept", "application/json");
         request.setRequestHeader("Content-Type", "application/json; charset=utf-8");
         request.setRequestHeader("Prefer", "odata.maxpagesize=" + maxPageSize);
+        request.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
         if (formattedValue) {
             request.setRequestHeader("Prefer",
                 "odata.include-annotations=OData.Community.Display.V1.FormattedValue");
